@@ -45,7 +45,7 @@ jobs:
 
     # Setup vcpkg and build deps
     - name: Restore artifacts, or Run vcpkg, build and cache artifacts
-      uses: lukka/run-vcpkg@v5
+      uses: lukka/run-vcpkg@v7.2
       id: runvcpkg
       with:
         #setupOnly: true
