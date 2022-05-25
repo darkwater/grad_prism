@@ -8,7 +8,7 @@ on:
 jobs:
   job_build_cpp:
     name: ${{ matrix.os }}-${{ matrix.buildConfig }}
-    runs-on: [ '${{ matrix.runs_on }}', '${{ matrix.os }}' ]
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
