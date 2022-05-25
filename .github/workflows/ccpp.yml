@@ -11,26 +11,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [windows-2022, ubuntu-22.04]
         include:
-          - os: windows-latest
+          - os: windows-2022
             buildConfig: release
-            displayName: grad_prism_windows
+            displayName: grad_intercept_template_windows
             triplet: x64-windows-static
             configuration: 'x64.*'
             installPath: 'install/bin/'
-          - os: ubuntu-latest
+          - os: ubuntu-22.04
             buildConfig: release
-            displayName: grad_prism_ubuntu
+            displayName: grad_intercept_template_ubuntu
             triplet: x64-linux
             configuration: 'x64.*'
             installPath: 'install/lib/'
 
     steps:
-    - name: Use gcc-9/g++-9 on ubuntu
+    - name: Use gcc-11/g++-11 on ubuntu
       run: |
-        echo "CC=gcc-9" >> $GITHUB_ENV
-        echo "CXX=g++-9" >> $GITHUB_ENV
+        echo "CC=gcc-11" >> $GITHUB_ENV
+        echo "CXX=g++-11" >> $GITHUB_ENV
       shell: bash
       if: matrix.os == 'ubuntu-latest'
 
@@ -51,8 +51,8 @@ jobs:
         #setupOnly: true
         vcpkgDirectory: '${{ github.workspace }}/vcpkg'
         vcpkgTriplet: '${{ matrix.triplet }}'
-        vcpkgArguments: 'prometheus-cpp boost-algorithm boost-property-tree'
-        vcpkgGitCommitId: 'acb6b10e7fdf5e8519c18398d0b069e1d58ca025'
+        vcpkgArguments: 'prometheus-cpp boost-algorithm boost-property-tree fmt'
+        vcpkgGitCommitId: '93b38546e271ac8047a6dd00469f14845beb4642'
 
     # Build with CMake and Ninja
     - name: Run CMake+Ninja
@@ -87,17 +87,17 @@ jobs:
       - name: Download windows build
         uses: actions/download-artifact@v2
         with:
-          name: grad_prism_windows
+          name: grad_intercept_template_windows
       - name: Download ubuntu build
         uses: actions/download-artifact@v2
         with:
-          name: grad_prism_ubuntu
+          name: grad_intercept_template_ubuntu
 
       # zip it
       - uses: papeloto/action-zip@v1
         with:
-          files: \@grad_prism/
-          dest: \@grad_prism.zip
+          files: \@grad_intercept_template/
+          dest: \@grad_intercept_template.zip
 
       # release it
       - uses: "marvinpinto/action-automatic-releases@latest"
@@ -105,5 +105,4 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: true
           files: |
-            \@grad_prism.zip
-
+            \@grad_intercept_template.zip
