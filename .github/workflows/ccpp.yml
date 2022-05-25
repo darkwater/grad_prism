@@ -4,6 +4,7 @@ on:
   push:
   pull_request:
 
+
 jobs:
   job_build_cpp:
     name: ${{ matrix.os }}-${{ matrix.buildConfig }}
@@ -19,6 +20,7 @@ jobs:
             triplet: x64-windows-static
             configuration: 'x64.*'
             installPath: 'install/bin/'
+            runs_on: self-hosted
           - os: ubuntu-latest
             buildConfig: release
             displayName: grad_prism_ubuntu
