@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [[self-hosted, windows-latest], ubuntu-latest]
         include:
           - os: windows-latest
             buildConfig: release
