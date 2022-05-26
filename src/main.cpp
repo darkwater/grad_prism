@@ -503,14 +503,14 @@ void intercept::pre_start() {
             auto registry = std::make_shared<pm::Registry>();
 
             auto& fpsGaugeFamily = pm::BuildGauge()
-                .Name("fps")
+                .Name("prism_fps")
                 .Help("Current framerate calculated over last 16 frames")
                 .Register(*registry);
             auto& avgFpsGauge = fpsGaugeFamily.Add({ {"type", "avg"} });
             auto& minFpsGauge = fpsGaugeFamily.Add({ {"type", "min"} });
 
             auto& activeScriptsGaugeFamily = pm::BuildGauge()
-                .Name("activeScripts")
+                .Name("prism_active_scripts")
                 .Help("Number of currently running scripts")
                 .Register(*registry);
             auto& activeSpawnedGauge = activeScriptsGaugeFamily.Add({ {"type", "spawned"} });
@@ -519,7 +519,7 @@ void intercept::pre_start() {
             auto& activeexecFSMedGauge = activeScriptsGaugeFamily.Add({ {"type", "execFSMed"} });
 
             auto& playersGaugeFamily = pm::BuildGauge()
-                .Name("players")
+                .Name("prism_players")
                 .Help("Count of players")
                 .Register(*registry);
             auto& playersWestGauge = playersGaugeFamily.Add({ { "side", "west" } });
@@ -530,20 +530,20 @@ void intercept::pre_start() {
             auto& playersLobbyGauge = playersGaugeFamily.Add({ { "side", "lobby"} });
 
             auto& aiGaugeFamily = pm::BuildGauge()
-                .Name("ai")
+                .Name("prism_ai")
                 .Help("Count of AI")
                 .Register(*registry);
             auto& localAiGauge = aiGaugeFamily.Add({ { "type", "local" } });
             auto& nonLocalAiGauge = aiGaugeFamily.Add({ { "type", "non_local" } });
 
             auto& allDeadMenFamily = pm::BuildGauge()
-                .Name("allDeadMen")
+                .Name("prism_all_dead_men")
                 .Help("A list of dead units including agents")
                 .Register(*registry);
             auto& allDeadMenGauge = allDeadMenFamily.Add({});
 
             auto& cpuGaugeFamily = pm::BuildGauge()
-                .Name("cpu")
+                .Name("prism_cpu")
                 .Help("Current CPU usage")
                 .Register(*registry);
 
@@ -551,7 +551,7 @@ void intercept::pre_start() {
             auto& cpuProcessGauge = cpuGaugeFamily.Add({ { "type", "process_usage" } });
 
             auto& memGaugeFamily = pm::BuildGauge()
-                .Name("mem")
+                .Name("prism_mem")
                 .Help("Current Memory usage")
                 .Register(*registry);
 
@@ -561,7 +561,7 @@ void intercept::pre_start() {
             auto& memPhysProcessGauge = memGaugeFamily.Add({ { "type", "physical_process_usage" } });
 
             missionTimeFamily = &pm::BuildGauge()
-                .Name("time")
+                .Name("prism_time")
                 .Help("Time spent in mission")
                 .Register(*registry);
 
